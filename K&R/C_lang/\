@@ -1,0 +1,33 @@
+#include <stdio.h>
+// char frequency histogram
+#define MAX_ALLOW_ 26
+int main() {
+  int freq[MAX_ALLOW_];
+  int c, nc;
+
+  while ((c = getchar()) != EOF) {
+    if (c >= 'a' && c <= 'z') {
+      ++freq[c - 'a'];
+    }
+  }
+
+  int max = 0;
+  for (int i = 0; i < MAX_ALLOW_; i++) {
+    if (freq[i] > max)
+      max = freq[i];
+  }
+  for (int row = max; row >= 1; row--) {
+    for (int col = 0; col < MAX_ALLOW_; col++) {
+      if (freq[col] >= row)
+        printf(" | ");
+      else
+        printf("   ");
+    }
+    printf("\n");
+  }
+
+  for (int i = 0; i <= 27; i++) {
+    printf("%2c", putchar(i));
+  }
+  return 0;
+}
