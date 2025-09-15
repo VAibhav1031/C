@@ -12,6 +12,12 @@ int main() {
   int c;
   int next;
 
+  // 1. first we have checked the is this  start with comment prefix or not , if
+  // so then  we will peak-a-boo next character which will make sure which type
+  // it is getchar we will use if all thing is nice , else we will use the
+  // ungetc cause the next character is not the one which satisfy it is a
+  // comment so  we will put back  that to stdin  adn  then our normally print
+  // the character in printf function
   int a, b;
   b = a / b;
   while ((c = getchar()) != EOF) {
@@ -33,12 +39,18 @@ int main() {
   return 0;
 }
 
+// 2. It is  the one place  where we will  say things  work nicely , very simple
+// and nice we will move the getchar pointer to the next character until we will
+// get the 'EOF' or '\n'
 int singleline_comment_destroyer(int c) {
   while ((c = getchar()) != EOF && c != '\n') {
   }
   return c;
 }
 
+// 3 It is  bit  different here '\n' doesnt make sense of ending , it is only
+// marked ended or finised with
+// */  so  same little peak-a-boo
 int multiline_comment_destroyer(int c) {
   int next;
   while ((c = getchar()) != EOF) {
