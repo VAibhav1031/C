@@ -9,16 +9,18 @@ int comment_removal(FILE *in, FILE *out) {
   // ungetc cause the next character is not the one which satisfy it is a
   // comment so  we will put back  that to stdin  adn  then our normally print
   // the character in printf function
-  int a, b;
+
+  // for testing purpose
+  int a = 10, b = 2;
   b = a / b;
+
   while ((c = fgetc(in)) != EOF) {
     if (c == '/') {
       next = fgetc(in);
       if (next == '/') {
-        while ((c = fgetc(in) != EOF && c != '\n')) {
+        while ((c = fgetc(in)) != EOF && c != '\n') {
         }
       } else if (next == '*') {
-        int next;
         while ((c = fgetc(in) != EOF)) {
           if (c == '*') {
             next = fgetc(in);
@@ -28,7 +30,9 @@ int comment_removal(FILE *in, FILE *out) {
         }
         continue;
       } else {
-        ungetc(next, stdin);
+        // condition if the next character is not the any type of comment put it
+        // back
+        ungetc(next, in);
       }
     }
 

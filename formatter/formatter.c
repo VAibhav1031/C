@@ -81,16 +81,16 @@ int main(int argc, char *argv[]) {
       }
       comment_removal(input, temp);
       rewind(temp);
-      newline_remover(temp, stdout);
+      newline_remover(temp, output);
       fclose(temp);
     }
 
     else if (remove_extra_newline_flag) {
-      newline_remover(input, stdout);
+      newline_remover(input, output);
     }
 
     else if (remove_comment_flag) { //  Both
-      comment_removal(input, stdout);
+      comment_removal(input, output);
       //
     }
     fclose(input);

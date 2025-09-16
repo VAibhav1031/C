@@ -10,11 +10,12 @@ int newline_remover(FILE *in, FILE *out) {
         fputc('\n', out);
         last_was_blank = 1;
       }
-      // else skip additional newlines
     } else if (isspace(c) && c != '\n') {
-      // optional: collapse spaces/tabs-only lines
+      // putchar essential tabs or spaces
+      // collapse spaces/tabs-only lines
       fputc(c, out);
     } else {
+      // normally print the normal char
       fputc(c, out);
       last_was_blank = 0;
     }
