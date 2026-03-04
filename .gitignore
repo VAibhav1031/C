@@ -1,1 +1,5 @@
+!*.c
+!*.h
+
+*.out
 .wakatime-project

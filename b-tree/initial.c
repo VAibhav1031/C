@@ -191,39 +191,39 @@ Split *insert(Node *root, int key_val) {
       return node_splitting(root);
     }
     return NULL;
-
   }
 
-  // now for the internal node insertion
-  else {
-    // navigate to right node before insertion
-    Node *temp = root;
-    Node *parent_node;
-    while (!temp->is_leaf) {
-      int i = 0;
-      while (i <= temp->num_keys && key_val > temp->keys[i]) {
-        i++;
-      }
-      parent_node = temp;
-      temp = temp->children[i];
-    }
-
-    // now we have to check for split or not which we we have to ripple it
-    // upward
-
-    Split *result = insert(temp, key_val);
-    if (!result) {
-      return NULL;
-    }
-
-    insert_promoted(root, result->promoted_key, result->left, result->right);
-
-    if (root->num_keys == M) {
-      return node_splitting(root);
-    }
-
+  int i = 0;
+  while (i < root->num_keys && key_val > root->keys[i]) {
+    i++;
+  }
+  Split *result = insert(root->children[i], key_val);
+  if (!result) {
     return NULL;
   }
+
+  insert_promoted(root, result->promoted_key, result->left, result->right);
+
+  if (root->num_keys == M) {
+    return node_splitting(root);
+  }
+
+  return NULL;
+}
+
+Node *insert_key(Node *root, int key) {
+  Split *res = insert(root, key);
+
+  if (!res) {
+    return root;
+  }
+
+  Node *new_root = init_node(false);
+  new_root->keys[0] = key;
+  new_root->num_keys = 1;
+  new_root->children[0] = res->left;
+  new_root->children[1] = res->right;
+  return new_root;
 }
 
 int main() {}
