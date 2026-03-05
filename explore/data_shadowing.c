@@ -47,19 +47,23 @@ typedef struct {
 // we can make thing out of this by using the  do and while  in the  macros of these type where curly braces are used 
 #define arr_push(arr, x)\
     do {\
+     Header *header;\
      if((arr) ==NULL){\   
-                Header  *header = malloc(sizeof(*(arr))*ARR_INIT_CAPACITY + sizeof(Header));\
+                header = malloc(sizeof(*(arr))*ARR_INIT_CAPACITY + sizeof(Header));\
                 if(!header) break;\
                 header->count = 0;                                                          \
                 header->capacity = ARR_INIT_CAPACITY;                                        \
                 arr = (void *)(header +  1);                                                  \
         }\
      else{\
-        Header *header = ((Header *)(arr))-1;\ 
+        header = ((Header *)(arr))-1;\ 
     }\
     if (header->count >= header->capacity){\
-        header->capacity *= 2;\
-        header = realloc(header, sizeof(*(arr))*header->capacity + sizeof(Header));\
+        size_t new_cap = header->capacity *2;\
+        Header *new_header = realloc(header, sizeof(*(arr))*header->capacity + sizeof(Header));\
+        if (!new_header) break;\
+        header = new_header;\
+        header->capacity = new_cap;\
         arr = (void *)(header + 1);\
     }\
     else{\
