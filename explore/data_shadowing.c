@@ -39,7 +39,7 @@ typedef struct {
 // ------------------------------------------------------------------------------------------------------------------------------------
 
 
-#define ARR_INIT_CAPACITY 4
+#define ARR_INIT_CAPACITY 256 
 
 // currently we are using is the  curly braces for the creation of the scope , whichis good for defining the htings and  working way better than we thought as other way if we say so ,  but the thing is that it is being the pre
 // processor which replace tghat  arr_push thing usage with this curly base scope , if we uyse the thing whiuchis not a problem but if we use that thing normally like programming other way , if  else block ,  we would use the ; semi-colon but since it is being the curly braces  which is the syntatic error , most of the time we rarely know about thathting 
